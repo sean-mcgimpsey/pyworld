@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pyworld
+  name: pyworld
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pyworld
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: pyworld
+    spec:
+      serviceAccountName: pyworld
+      containers:
+      - image: seanmcgimpsey1/pyworld
+        name: pyworld
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 1
+          periodSeconds: 10 
+        resources:
+          requests: 
+            cpu: 100m
+            memory: 150Mi
+          limits: 
+            cpu: 200m 
+            memory: 300Mi
