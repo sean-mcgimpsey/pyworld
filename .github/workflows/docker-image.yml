@@ -24,4 +24,5 @@ jobs:
     - name: Check for output 
       run: |
         docker ps 
+        sleep 10s
         curl --silent http://localhost:8888|grep "Hello World"
