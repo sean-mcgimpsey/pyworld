@@ -23,4 +23,5 @@ jobs:
       run: docker run -d -p 8888:8080 ${{ env.name}}:${{ env.version }}
     - name: Check for output 
       run: |
+        docker ps 
         curl --silent http://localhost:8888|grep "Hello World"
